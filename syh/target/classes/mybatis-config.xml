@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<!-- 全局配置 -->
+<configuration>
+  <settings>
+    <!-- 是否开启自动驼峰命名规则（camel case）映射，
+                即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射。
+     -->
+    <setting name="mapUnderscoreToCamelCase" value="true"></setting>
+  </settings>
+  
+  
+  <!-- 设置实体类的别名，设置后可以简化sql配置文件的代码
+       若不设置，在sql配置文件中药写明实体类路径+实体类名称
+   -->
+  <typeAliases>
+    <package name="com.wfu.crud.bean"/>
+  </typeAliases>
+  
+  <!-- 引入分页插件 -->
+  <!-- 要求3.3版本以上的mybatis -->
+  <plugins>
+  <!-- 
+     pageHelper的工作原理：通过mybatis的pulgin实现了Interceptor接口，
+        从而获得要执行的sql语句实现分页技术
+   -->
+    <!--  
+        此处拼写有误
+    <plugin interceptor="com.github.pagehelper.PageIntercepter"></plugin>
+    -->
+    <plugin interceptor="com.github.pagehelper.PageInterceptor">
+      <!-- 分页参数合理化，即不可能到达-1页之类不合理的页数 -->
+      <property name="reasonable" value="true"/>
+    </plugin>
+  </plugins>
+  
+</configuration>
